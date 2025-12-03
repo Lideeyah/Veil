@@ -5,6 +5,7 @@
     "main": "src/index.tsx",
     "types": "src/index.tsx",
     "scripts": {
+        "build": "echo 'no build needed'",
         "lint": "eslint .",
         "check-types": "tsc --noEmit"
     },

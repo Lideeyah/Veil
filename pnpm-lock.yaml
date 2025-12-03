@@ -236,6 +236,9 @@ importers:
       '@types/jest':
         specifier: ^29.0.0
         version: 29.5.14
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.25
       '@veil/config':
         specifier: workspace:*
         version: link:../config
@@ -316,6 +319,9 @@ importers:
       '@types/jest':
         specifier: ^29.0.0
         version: 29.5.14
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.25
       '@veil/config':
         specifier: workspace:*
         version: link:../config

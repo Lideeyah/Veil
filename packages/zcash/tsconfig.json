@@ -5,12 +5,8 @@
         "baseUrl": ".",
         "noEmit": false,
         "outDir": "dist",
-        "declaration": true,
-        "paths": {
-            "@veil/types": [
-                "../types/src/index.ts"
-            ]
-        }
+        "rootDir": "src",
+        "declaration": true
     },
     "include": [
         "src/**/*"

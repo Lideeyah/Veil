@@ -1,0 +1,78 @@
+  console.log
+    Jest setup running
+
+      at Object.<anonymous> (jest.setup.js:1:173)
+
+  console.log
+    [dotenv@17.2.3] injecting env (0) from .env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+
+      at _log (node_modules/.pnpm/dotenv@17.2.3/node_modules/dotenv/lib/main.js:142:11)
+
+  console.warn
+    RPC unavailable, generating MOCK address for development
+
+    [0m [90m 25 |[39m         }[33m;[39m
+     [90m 26 |[39m     } [36mcatch[39m (error) {
+    [31m[1m>[22m[39m[90m 27 |[39m         console[33m.[39mwarn([32m'RPC unavailable, generating MOCK address for development'[39m)[33m;[39m
+     [90m    |[39m                 [31m[1m^[22m[39m
+     [90m 28 |[39m         [36mreturn[39m generateMockAddress()[33m;[39m
+     [90m 29 |[39m     }
+     [90m 30 |[39m }[0m
+
+      at generateShieldedAddress (../../packages/zcash/src/address.ts:27:17)
+      at register (src/controllers/creators.ts:37:53)
+
+{"level":30,"time":1764742292725,"pid":19596,"hostname":"DESKTOP-3B0PLEP","msg":"::ffff:127.0.0.1 - - [03/Dec/2025:06:11:32 +0000] \"POST /api/creators/register HTTP/1.1\" 201 359 \"-\" \"-\""}
+{"level":50,"time":1764742292752,"pid":19596,"hostname":"DESKTOP-3B0PLEP","err":{"type":"TypeError","message":"db_1.prisma.tier.findFirst is not a function","stack":"TypeError: db_1.prisma.tier.findFirst is not a function\n    at createTier (C:\\Users\\Admin\\Veil\\apps\\api\\src\\controllers\\creators.ts:232:44)\n    at Layer.handle [as handle_request] (C:\\Users\\Admin\\Veil\\apps\\api\\node_modules\\.pnpm\\express@4.22.1\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Admin\\Veil\\apps\\api\\node_modules\\.pnpm\\express@4.22.1\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at C:\\Users\\Admin\\Veil\\apps\\api\\src\\middleware\\validation.ts:7:9\n    at Layer.handle [as handle_request] (C:\\Users\\Admin\\Veil\\apps\\api\\node_modules\\.pnpm\\express@4.22.1\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Admin\\Veil\\apps\\api\\node_modules\\.pnpm\\express@4.22.1\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at isCreator (C:\\Users\\Admin\\Veil\\apps\\api\\src\\middleware\\auth.ts:49:9)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)"},"msg":"Unhandled Error"}
+{"level":30,"time":1764742292762,"pid":19596,"hostname":"DESKTOP-3B0PLEP","msg":"::ffff:127.0.0.1 - - [03/Dec/2025:06:11:32 +0000] \"POST /api/creators/tiers HTTP/1.1\" 500 91 \"-\" \"-\""}
+{"level":30,"time":1764742292785,"pid":19596,"hostname":"DESKTOP-3B0PLEP","msg":"::ffff:127.0.0.1 - - [03/Dec/2025:06:11:32 +0000] \"POST /api/payments/initiate HTTP/1.1\" 200 337 \"-\" \"-\""}
+{"level":50,"time":1764742292795,"pid":19596,"hostname":"DESKTOP-3B0PLEP","code":"ERR_CRYPTO_INVALID_IV","msg":"Unhandled Error"}
+{"level":30,"time":1764742292798,"pid":19596,"hostname":"DESKTOP-3B0PLEP","msg":"::ffff:127.0.0.1 - - [03/Dec/2025:06:11:32 +0000] \"POST /api/payments/webhook/process HTTP/1.1\" 500 91 \"-\" \"-\""}
+{"level":30,"time":1764742292809,"pid":19596,"hostname":"DESKTOP-3B0PLEP","msg":"::ffff:127.0.0.1 - - [03/Dec/2025:06:11:32 +0000] \"POST /api/payments/verify HTTP/1.1\" 200 152 \"-\" \"-\""}
+FAIL src/tests/integration.test.ts
+  End-to-End Flow (Mocked)
+    √ should register a creator (1175 ms)
+    × should create a tier (37 ms)
+    √ should initiate a payment (14 ms)
+    × should process a payment via webhook (13 ms)
+    √ should verify access (11 ms)
+
+  ● End-to-End Flow (Mocked) › should create a tier
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 201
+    Received: 500
+
+    [0m [90m  99 |[39m             })[33m;[39m
+     [90m 100 |[39m
+    [31m[1m>[22m[39m[90m 101 |[39m         expect(res[33m.[39mstatus)[33m.[39mtoBe([35m201[39m)[33m;[39m
+     [90m     |[39m                            [31m[1m^[22m[39m
+     [90m 102 |[39m         expect(res[33m.[39mbody[33m.[39msuccess)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m 103 |[39m     })[33m;[39m
+     [90m 104 |[39m[0m
+
+      at Object.<anonymous> (src/tests/integration.test.ts:101:28)
+
+  ● End-to-End Flow (Mocked) › should process a payment via webhook
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 500
+
+    [0m [90m 163 |[39m             })[33m;[39m
+     [90m 164 |[39m
+    [31m[1m>[22m[39m[90m 165 |[39m         expect(res[33m.[39mstatus)[33m.[39mtoBe([35m200[39m)[33m;[39m
+     [90m     |[39m                            [31m[1m^[22m[39m
+     [90m 166 |[39m         expect(res[33m.[39mbody[33m.[39msuccess)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m 167 |[39m     })[33m;[39m
+     [90m 168 |[39m[0m
+
+      at Object.<anonymous> (src/tests/integration.test.ts:165:28)
+
+Test Suites: 1 failed, 1 total
+Tests:       2 failed, 3 passed, 5 total
+Snapshots:   0 total
+Time:        3.884 s, estimated 4 s
+Ran all test suites matching /src\\tests\\integration.test.ts/i.

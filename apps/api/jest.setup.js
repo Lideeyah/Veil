@@ -1,0 +1,11 @@
+console.log('Jest setup running');
+process.env.NODE_ENV = 'test';
+process.env.PORT = '3001';
+process.env.DATABASE_URL = 'file:./test.db';
+process.env.JWT_SECRET = 'super-secret-jwt-key-at-least-32-bytes-long';
+process.env.ENCRYPTION_KEY = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef';
+process.env.ZCASH_RPC_HOST = 'localhost';
+process.env.ZCASH_RPC_PORT = '18232';
+process.env.ZCASH_RPC_USER = 'user';
+process.env.ZCASH_RPC_PASSWORD = 'password';
+process.env.CORS_ORIGIN = '*';

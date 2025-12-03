@@ -1,0 +1,60 @@
+
+> veil-monorepo@0.0.0 build C:\Users\Admin\Veil
+> turbo run build
+
+turbo 2.6.1
+
+ WARNING  An issue occurred while attempting to parse C:\Users\Admin\Veil\pnpm-lock.yaml. Turborepo will still function, but some features may not be available:
+   x Could not resolve workspaces.
+  |-> Unable to convert to yaml: missing field `importers`
+  `-> missing field `importers`
+
+• Packages in scope: @veil/config, @veil/crypto, @veil/types, @veil/ui, @veil/zcash, api, web
+• Running build in 7 packages
+• Remote caching disabled
+api:build: cache miss, executing 0fb88b45b1562780
+web:build: cache miss, executing a9328e6d9818a842
+api:build: 
+api:build: > api@0.0.0 build C:\Users\Admin\Veil\apps\api
+api:build: > tsc
+api:build: 
+web:build: 
+web:build: > web@0.0.0 build C:\Users\Admin\Veil\apps\web
+web:build: > next build
+web:build: 
+web:build:    ▲ Next.js 14.0.0
+web:build: 
+web:build:    Creating an optimized production build ...
+web:build:  ✓ Compiled successfully
+web:build:    Linting and checking validity of types ...
+web:build:    Collecting page data ...
+web:build:    Generating static pages (0/7) ...
+web:build: web:build:    Generating static pages (1/7) 
+web:build: web:build:    Generating static pages (3/7) 
+web:build: web:build:    Generating static pages (5/7) 
+web:build: web:build:  ✓ Generating static pages (7/7) 
+web:build:    Finalizing page optimization ...
+web:build:    Collecting build traces ...
+web:build: 
+web:build: Route (app)                              Size     First Load JS
+web:build: ┌ ○ /                                    1.17 kB         116 kB
+web:build: ├ ○ /_not-found                          877 B          88.6 kB
+web:build: ├ λ /creators/[username]                 12.2 kB         120 kB
+web:build: ├ ○ /dashboard                           4.76 kB         112 kB
+web:build: ├ ○ /login                               4.22 kB         119 kB
+web:build: └ ○ /register                            4.34 kB         119 kB
+web:build: + First Load JS shared by all            87.7 kB
+web:build:   ├ chunks/0f704d39-c01090987882005b.js  53.3 kB
+web:build:   ├ chunks/630-a59fbdc2a93c16af.js       32.4 kB
+web:build:   ├ chunks/main-app-c4764709443017ff.js  228 B
+web:build:   └ chunks/webpack-2d7c5d14b58cde8a.js   1.79 kB
+web:build: 
+web:build: 
+web:build: ○  (Static)   prerendered as static HTML
+web:build: λ  (Dynamic)  server-rendered on demand using Node.js
+web:build: 
+
+ Tasks:    2 successful, 2 total
+Cached:    0 cached, 2 total
+  Time:    40.084s 
+

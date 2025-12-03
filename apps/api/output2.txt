@@ -1,0 +1,68 @@
+  console.log
+    Jest setup running
+
+      at Object.<anonymous> (jest.setup.js:1:173)
+
+  console.log
+    [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+
+      at _log (node_modules/.pnpm/dotenv@17.2.3/node_modules/dotenv/lib/main.js:142:11)
+
+  console.warn
+    RPC unavailable, generating MOCK address for development
+
+    [0m [90m 25 |[39m         }[33m;[39m
+     [90m 26 |[39m     } [36mcatch[39m (error) {
+    [31m[1m>[22m[39m[90m 27 |[39m         console[33m.[39mwarn([32m'RPC unavailable, generating MOCK address for development'[39m)[33m;[39m
+     [90m    |[39m                 [31m[1m^[22m[39m
+     [90m 28 |[39m         [36mreturn[39m generateMockAddress()[33m;[39m
+     [90m 29 |[39m     }
+     [90m 30 |[39m }[0m
+
+      at generateShieldedAddress (../../packages/zcash/src/address.ts:27:17)
+      at register (src/controllers/creators.ts:37:53)
+
+{"level":30,"time":1764742212146,"pid":11336,"hostname":"DESKTOP-3B0PLEP","msg":"::ffff:127.0.0.1 - - [03/Dec/2025:06:10:12 +0000] \"POST /api/creators/register HTTP/1.1\" 201 352 \"-\" \"-\""}
+  console.log
+    Response: 201 {
+      "success": true,
+      "data": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNyZWF0b3ItMTIzIiwidXNlcm5hbWUiOiJ0ZXN0Y3JlYXRvciIsImlhdCI6MTc2NDc0MjIxMiwiZXhwIjoxNzY1MzQ3MDEyfQ.1gzsgXKjZZGLmN5paBXeCA9mKGNpH1dR8C_Dc84iX9M",
+        "creator": {
+          "id": "creator-123",
+          "username": "testcreator",
+          "displayName": "Test Creator",
+          "zcashShieldedAddress": "zs1addr",
+          "tiers": []
+        }
+      }
+    }
+
+      at Object.<anonymous> (src/tests/integration.test.ts:56:17)
+
+FAIL src/tests/integration.test.ts
+  End-to-End Flow (Simple)
+    × should register a creator (492 ms)
+
+  ● End-to-End Flow (Simple) › should register a creator
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 201
+
+    [0m [90m 56 |[39m         console[33m.[39mlog([32m'Response:'[39m[33m,[39m res[33m.[39mstatus[33m,[39m [33mJSON[39m[33m.[39mstringify(res[33m.[39mbody[33m,[39m [36mnull[39m[33m,[39m [35m2[39m))[33m;[39m
+     [90m 57 |[39m
+    [31m[1m>[22m[39m[90m 58 |[39m         expect(res[33m.[39mstatus)[33m.[39mtoBe([35m200[39m)[33m;[39m
+     [90m    |[39m                            [31m[1m^[22m[39m
+     [90m 59 |[39m         expect(res[33m.[39mbody[33m.[39msuccess)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m 60 |[39m     })[33m;[39m
+     [90m 61 |[39m })[33m;[39m[0m
+
+      at Object.<anonymous> (src/tests/integration.test.ts:58:28)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
+Snapshots:   0 total
+Time:        3.223 s, estimated 4 s
+Ran all test suites matching /src\\tests\\integration.test.ts/i.

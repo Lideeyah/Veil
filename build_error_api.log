@@ -1,0 +1,52 @@
+
+> veil-monorepo@0.0.0 build C:\Users\Admin\Veil
+> turbo run build
+
+turbo 2.6.1
+
+ WARNING  An issue occurred while attempting to parse C:\Users\Admin\Veil\pnpm-lock.yaml. Turborepo will still function, but some features may not be available:
+   x Could not resolve workspaces.
+  |-> Unable to convert to yaml: missing field `importers`
+  `-> missing field `importers`
+
+• Packages in scope: @veil/config, @veil/crypto, @veil/types, @veil/ui, @veil/zcash, api, web
+• Running build in 7 packages
+• Remote caching disabled
+api:build: cache miss, executing c1a3003015d27c78
+web:build: cache miss, executing c44b4608d1ab860f
+web:build: 
+web:build: > web@0.0.0 build C:\Users\Admin\Veil\apps\web
+web:build: > next build
+web:build: 
+api:build: 
+api:build: > api@0.0.0 build C:\Users\Admin\Veil\apps\api
+api:build: > tsc
+api:build: 
+web:build:    ▲ Next.js 14.0.0
+web:build: 
+web:build:    Creating an optimized production build ...
+api:build: src/controllers/creators.ts(18,16): error TS2769: No overload matches this call.
+api:build:   Overload 1 of 5, '(payload: string | object | Buffer<ArrayBufferLike>, secretOrPrivateKey: null, options?: (SignOptions & { algorithm: "none"; }) | undefined): string', gave the following error.
+api:build:     Argument of type 'string' is not assignable to parameter of type 'null'.
+api:build:   Overload 2 of 5, '(payload: string | object | Buffer<ArrayBufferLike>, secretOrPrivateKey: Buffer<ArrayBufferLike> | Secret | PrivateKeyInput | JsonWebKeyInput, options?: SignOptions | undefined): string', gave the following error.
+api:build:     Type 'string' is not assignable to type 'number | StringValue | undefined'.
+api:build:   Overload 3 of 5, '(payload: string | object | Buffer<ArrayBufferLike>, secretOrPrivateKey: Buffer<ArrayBufferLike> | Secret | PrivateKeyInput | JsonWebKeyInput, callback: SignCallback): void', gave the following error.
+api:build:     Object literal may only specify known properties, and 'expiresIn' does not exist in type 'SignCallback'.
+api:build: ../../packages/zcash/src/address.ts(1,58): error TS2307: Cannot find module '@veil/types' or its corresponding type declarations.
+api:build: ../../packages/zcash/src/commitment.ts(2,41): error TS2307: Cannot find module '@veil/types' or its corresponding type declarations.
+api:build: ../../packages/zcash/src/memo.ts(1,42): error TS2307: Cannot find module '@veil/types' or its corresponding type declarations.
+api:build: ../../packages/zcash/src/monitor.ts(2,37): error TS2307: Cannot find module '@veil/types' or its corresponding type declarations.
+api:build: ../../packages/zcash/src/utils.ts(1,30): error TS2307: Cannot find module '@veil/types' or its corresponding type declarations.
+api:build: ../../packages/zcash/src/utils.ts(3,29): error TS2737: BigInt literals are not available when targeting lower than ES2020.
+api:build: ../../packages/zcash/src/utils.ts(22,12): error TS2737: BigInt literals are not available when targeting lower than ES2020.
+api:build:  ELIFECYCLE  Command failed with exit code 1.
+api:build: ERROR: command finished with error: command (C:\Users\Admin\Veil\apps\api) C:\Users\Admin\AppData\Local\pnpm\.tools\pnpm\8.15.0\bin\pnpm.CMD run build exited (1)
+api#build: command (C:\Users\Admin\Veil\apps\api) C:\Users\Admin\AppData\Local\pnpm\.tools\pnpm\8.15.0\bin\pnpm.CMD run build exited (1)
+
+ Tasks:    0 successful, 2 total
+Cached:    0 cached, 2 total
+  Time:    4.931s 
+Failed:    api#build
+
+ ERROR  run failed: command  exited (1)
+ ELIFECYCLE  Command failed with exit code 1.

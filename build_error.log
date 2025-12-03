@@ -1,0 +1,41 @@
+ WARN  The "workspaces" field in package.json is not supported by pnpm. Create a "pnpm-workspace.yaml" file instead.
+ WARN  The "workspaces" field in package.json is not supported by pnpm. Create a "pnpm-workspace.yaml" file instead.
+
+> veil-monorepo@0.0.0 build C:\Users\Admin\Veil
+> turbo run build
+
+turbo 2.6.1
+
+  x Found `pipeline` field instead of `tasks`.
+    ,-[turbo.json:6:17]
+  5 |         ],
+  6 | ,->     "pipeline": {
+  7 | |           "build": {
+  8 | |               "dependsOn": [
+  9 | |                   "^build"
+ 10 | |               ],
+ 11 | |               "outputs": [
+ 12 | |                   ".next/**",
+ 13 | |                   "!.next/cache/**",
+ 14 | |                   "dist/**"
+ 15 | |               ]
+ 16 | |           },
+ 17 | |           "lint": {},
+ 18 | |           "dev": {
+ 19 | |               "cache": false,
+ 20 | |               "persistent": true
+ 21 | |           },
+ 22 | |           "db:push": {
+ 23 | |               "cache": false
+ 24 | |           },
+ 25 | |           "db:studio": {
+ 26 | |               "cache": false
+ 27 | |           },
+ 28 | |           "test": {}
+ 29 | |->     }
+    : `---- Rename `pipeline` field to `tasks`
+ 30 |     }
+    `----
+  help: Changed in 2.0: `pipeline` has been renamed to `tasks`.
+
+ ELIFECYCLE  Command failed with exit code 1.

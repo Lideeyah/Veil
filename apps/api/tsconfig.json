@@ -1,0 +1,26 @@
+{
+    "extends": "../../packages/config/tsconfig.json",
+    "compilerOptions": {
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "dist",
+        "noEmit": false,
+        "paths": {
+            "@veil/types": [
+                "../../packages/types/src/index.ts"
+            ],
+            "@veil/zcash": [
+                "../../packages/zcash/src/index.ts"
+            ],
+            "@veil/crypto": [
+                "../../packages/crypto/src/index.ts"
+            ],
+            "@veil/config": [
+                "../../packages/config/index.ts"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*"
+    ]
+}

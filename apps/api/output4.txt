@@ -1,0 +1,82 @@
+  console.log
+    Jest setup running
+
+      at Object.<anonymous> (jest.setup.js:1:173)
+
+  console.log
+    [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+
+      at _log (node_modules/.pnpm/dotenv@17.2.3/node_modules/dotenv/lib/main.js:142:11)
+
+{"level":50,"time":1764742441556,"pid":23304,"hostname":"DESKTOP-3B0PLEP","err":{"type":"TypeError","message":"(0 , crypto_1.hashPassword) is not a function","stack":"TypeError: (0 , crypto_1.hashPassword) is not a function\n    at register (C:\\Users\\Admin\\Veil\\apps\\api\\src\\controllers\\creators.ts:61:50)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)"},"msg":"Unhandled Error"}
+{"level":30,"time":1764742441580,"pid":23304,"hostname":"DESKTOP-3B0PLEP","msg":"::ffff:127.0.0.1 - - [03/Dec/2025:06:14:01 +0000] \"POST /api/creators/register HTTP/1.1\" 500 91 \"-\" \"-\""}
+{"level":40,"time":1764742441611,"pid":23304,"hostname":"DESKTOP-3B0PLEP","msg":"Operational Error: Invalid or expired token"}
+{"level":30,"time":1764742441622,"pid":23304,"hostname":"DESKTOP-3B0PLEP","msg":"::ffff:127.0.0.1 - - [03/Dec/2025:06:14:01 +0000] \"POST /api/creators/tiers HTTP/1.1\" 401 91 \"-\" \"-\""}
+{"level":50,"time":1764742441633,"pid":23304,"hostname":"DESKTOP-3B0PLEP","err":{"type":"TypeError","message":"(0 , zcash_1.getCurrentZECPrice) is not a function","stack":"TypeError: (0 , zcash_1.getCurrentZECPrice) is not a function\n    at initiate (C:\\Users\\Admin\\Veil\\apps\\api\\src\\controllers\\payments.ts:34:50)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)"},"msg":"Unhandled Error"}
+{"level":30,"time":1764742441640,"pid":23304,"hostname":"DESKTOP-3B0PLEP","msg":"::ffff:127.0.0.1 - - [03/Dec/2025:06:14:01 +0000] \"POST /api/payments/initiate HTTP/1.1\" 500 91 \"-\" \"-\""}
+{"level":30,"time":1764742441654,"pid":23304,"hostname":"DESKTOP-3B0PLEP","msg":"::ffff:127.0.0.1 - - [03/Dec/2025:06:14:01 +0000] \"POST /api/payments/webhook/process HTTP/1.1\" 200 158 \"-\" \"-\""}
+{"level":30,"time":1764742441725,"pid":23304,"hostname":"DESKTOP-3B0PLEP","msg":"::ffff:127.0.0.1 - - [03/Dec/2025:06:14:01 +0000] \"POST /api/payments/verify HTTP/1.1\" 200 152 \"-\" \"-\""}
+FAIL src/tests/integration.test.ts
+  End-to-End Flow (Mocked)
+    × should register a creator (207 ms)
+    × should create a tier (23 ms)
+    × should initiate a payment (19 ms)
+    √ should process a payment via webhook (67 ms)
+    √ should verify access (17 ms)
+
+  ● End-to-End Flow (Mocked) › should register a creator
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 201
+    Received: 500
+
+    [0m [90m 85 |[39m             })[33m;[39m
+     [90m 86 |[39m
+    [31m[1m>[22m[39m[90m 87 |[39m         expect(res[33m.[39mstatus)[33m.[39mtoBe([35m201[39m)[33m;[39m
+     [90m    |[39m                            [31m[1m^[22m[39m
+     [90m 88 |[39m         expect(res[33m.[39mbody[33m.[39msuccess)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m 89 |[39m         creatorToken [33m=[39m res[33m.[39mbody[33m.[39mdata[33m.[39mtoken[33m;[39m
+     [90m 90 |[39m     })[33m;[39m[0m
+
+      at Object.<anonymous> (src/tests/integration.test.ts:87:28)
+
+  ● End-to-End Flow (Mocked) › should create a tier
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 201
+    Received: 401
+
+    [0m [90m 116 |[39m             })[33m;[39m
+     [90m 117 |[39m
+    [31m[1m>[22m[39m[90m 118 |[39m         expect(res[33m.[39mstatus)[33m.[39mtoBe([35m201[39m)[33m;[39m
+     [90m     |[39m                            [31m[1m^[22m[39m
+     [90m 119 |[39m         expect(res[33m.[39mbody[33m.[39msuccess)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m 120 |[39m     })[33m;[39m
+     [90m 121 |[39m[0m
+
+      at Object.<anonymous> (src/tests/integration.test.ts:118:28)
+
+  ● End-to-End Flow (Mocked) › should initiate a payment
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 500
+
+    [0m [90m 138 |[39m             })[33m;[39m
+     [90m 139 |[39m
+    [31m[1m>[22m[39m[90m 140 |[39m         expect(res[33m.[39mstatus)[33m.[39mtoBe([35m200[39m)[33m;[39m
+     [90m     |[39m                            [31m[1m^[22m[39m
+     [90m 141 |[39m         expect(res[33m.[39mbody[33m.[39msuccess)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m 142 |[39m         expect(res[33m.[39mbody[33m.[39mdata[33m.[39mzcashAddress)[33m.[39mtoBe(zcashAddress)[33m;[39m
+     [90m 143 |[39m     })[33m;[39m[0m
+
+      at Object.<anonymous> (src/tests/integration.test.ts:140:28)
+
+Test Suites: 1 failed, 1 total
+Tests:       3 failed, 2 passed, 5 total
+Snapshots:   0 total
+Time:        3.123 s
+Ran all test suites matching /src\\tests\\integration.test.ts/i.

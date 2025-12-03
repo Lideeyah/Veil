@@ -1,0 +1,209 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// -----------------------------------------------------------------------------
+// ENUMS
+// -----------------------------------------------------------------------------
+
+// Enums removed for SQLite compatibility
+
+// -----------------------------------------------------------------------------
+// MODELS
+// -----------------------------------------------------------------------------
+
+/// Creator profile and cryptographic keys
+model Creator {
+  id                    String   @id @default(cuid())
+  username              String   @unique // lowercase, alphanumeric + underscore only
+  displayName           String
+  bio                   String?
+  profileImageUrl       String?
+  coverImageUrl         String?
+  
+  // Zcash Integration
+  zcashShieldedAddress  String   @unique // z-address
+  
+  // Encryption Keys (AES-256 encrypted)
+  encryptedViewingKey   String   // Encrypted viewing key
+  viewingKeyIV          String   // IV for viewing key
+  
+  encryptedMasterKey    String   // Encrypted master key for content encryption
+  masterKeyIV           String   // IV for master key
+  
+  // Contact Info (Encrypted)
+  email                 String   @unique // Encrypted email for notifications
+  emailIV               String   // IV for email
+  
+  passwordHash          String   // Hashed password
+  
+  isActive              Boolean  @default(true)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  // Relations
+  tiers                 Tier[]
+  content               Content[]
+  accessTokens          AccessToken[]
+  paymentMemos          PaymentMemo[]
+}
+
+/// Subscription tiers defined by creators
+model Tier {
+  id          String   @id @default(cuid())
+  creatorId   String
+  creator     Creator  @relation(fields: [creatorId], references: [id])
+  
+  name        String   // e.g., "Supporter", "Patron", "Inner Circle"
+  description String
+  
+  // Pricing
+  amountZEC   Decimal
+  amountUSD   Decimal?
+  
+  benefits    String   // JSON string
+  position    Int
+  
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  content      Content[]
+  accessTokens AccessToken[]
+
+  @@unique([creatorId, position])
+  @@index([creatorId, isActive])
+}
+
+/// Content items (posts, videos, etc.)
+model Content {
+  id                  String          @id @default(cuid())
+  creatorId           String
+  creator             Creator         @relation(fields: [creatorId], references: [id])
+  
+  tierId              String?
+  tier                Tier?           @relation(fields: [tierId], references: [id]) // null = available to all supporters
+  
+  // Encrypted Metadata
+  title               String          // Encrypted title
+  titleIV             String
+  description         String?         // Encrypted description
+  descriptionIV       String?
+  
+  // Content Details
+  contentType         String          // Enum: ARTICLE, VIDEO, AUDIO, IMAGE, FILE
+  storageProvider     String          // Enum: IPFS, S3, ARWEAVE
+  storageHash         String          // IPFS hash or S3 key
+  
+  // Content Encryption
+  encryptedContentKey String          // Content encryption key, encrypted with creator's master key
+  contentKeyIV        String
+  
+  // Media Metadata
+  fileSizeBytes       BigInt?
+  durationSeconds     Int?            // for video/audio
+  thumbnailUrl        String?
+  metadata            String?         // JSON string
+  
+  isPublic            Boolean         @default(false) // preview/teaser content
+  publishedAt         DateTime?
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+
+  // Relations
+  accessLogs          AccessLog[]
+
+  @@index([creatorId, publishedAt])
+  @@index([tierId])
+}
+
+/// Access tokens representing a valid subscription/payment
+model AccessToken {
+  id          String    @id @default(cuid())
+  commitment  String    @unique // SHA-256 hash of supporter secret
+  
+  creatorId   String
+  creator     Creator   @relation(fields: [creatorId], references: [id])
+  
+  tierId      String
+  tier        Tier      @relation(fields: [tierId], references: [id])
+  
+  validFrom   DateTime  @default(now())
+  validUntil  DateTime  // expiration timestamp
+  
+  isRevoked   Boolean   @default(false)
+  revokedAt   DateTime?
+  
+  metadata    String?   // JSON string
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([commitment])
+  @@index([creatorId, validUntil])
+  @@index([validFrom, validUntil])
+}
+
+/// Privacy-preserving access logs
+model AccessLog {
+  id             String   @id @default(cuid())
+  
+  contentId      String
+  content        Content  @relation(fields: [contentId], references: [id])
+  
+  commitmentHash String   // NOT FK, just hash for privacy
+  
+  accessedAt     DateTime @default(now())
+  ipHash         String?  // hashed IP for abuse detection, NOT stored raw
+  userAgentHash  String?  // hashed user agent
+
+  @@index([contentId, accessedAt])
+  @@index([commitmentHash])
+}
+
+/// Tracked Zcash payment memos
+model PaymentMemo {
+  id              String   @id @default(cuid())
+  txHash          String   @unique // Zcash transaction hash
+  
+  creatorId       String
+  creator         Creator  @relation(fields: [creatorId], references: [id])
+  
+  encryptedMemo   String   // encrypted memo data
+  memoIV          String
+  
+  amountZEC       Decimal?
+  
+  detectedAt      DateTime @default(now())
+  processedAt     DateTime?
+  isProcessed     Boolean  @default(false)
+  processingError String?
+  
+  @@index([creatorId, isProcessed])
+  @@index([detectedAt])
+}
+
+/// Ephemeral AI conversation context
+model AIConversation {
+  id             String   @id @default(cuid())
+  sessionId      String   @unique // ephemeral session identifier
+  
+  messageCount   Int      @default(0)
+  lastMessageAt  DateTime @default(now())
+  
+  contextSummary String?  // encrypted summary for continuity
+  
+  expiresAt      DateTime // conversations auto-delete after 24h
+  createdAt      DateTime @default(now())
+
+  @@index([expiresAt])
+}

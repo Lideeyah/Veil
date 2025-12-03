@@ -6,7 +6,9 @@
         "noEmit": false,
         "outDir": "dist",
         "rootDir": "src",
-        "declaration": true
+        "declaration": true,
+        "module": "commonjs",
+        "moduleResolution": "node"
     },
     "include": [
         "src/**/*"

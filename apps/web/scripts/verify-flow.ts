@@ -22,7 +22,7 @@ async function run() {
             bio: 'I am a test creator',
         }),
     });
-    const registerData = await registerRes.json();
+    const registerData = await registerRes.json() as any;
     if (!registerData.success) throw new Error(`Registration failed: ${JSON.stringify(registerData)}`);
     console.log('✅ Registration successful');
     const token = registerData.token;
@@ -41,7 +41,7 @@ async function run() {
             benefits: ['Access to content'],
         }),
     });
-    const tierData = await tierRes.json();
+    const tierData = await tierRes.json() as any;
     if (!tierData.success) throw new Error(`Tier creation failed: ${JSON.stringify(tierData)}`);
     console.log('✅ Tier created');
     const tierId = tierData.data.id;
@@ -50,7 +50,7 @@ async function run() {
     // 3. Discover Creators (Public)
     console.log('\n3. Fetching All Creators (Discover)...');
     const discoverRes = await fetch(`${API_URL}/creators`);
-    const discoverData = await discoverRes.json();
+    const discoverData = await discoverRes.json() as any;
     if (!discoverData.success) throw new Error(`Discover failed: ${JSON.stringify(discoverData)}`);
     const found = discoverData.data.find((c: any) => c.username === username);
     if (!found) throw new Error('Newly registered creator not found in discover list');
@@ -59,7 +59,7 @@ async function run() {
     // 4. Get Profile (Public)
     console.log(`\n4. Fetching Profile for ${username}...`);
     const profileRes = await fetch(`${API_URL}/creators/${username}`);
-    const profileData = await profileRes.json();
+    const profileData = await profileRes.json() as any;
     if (!profileData.id) throw new Error(`Profile fetch failed: ${JSON.stringify(profileData)}`);
     console.log('✅ Profile fetched');
 
@@ -73,7 +73,7 @@ async function run() {
             tierId,
         }),
     });
-    const paymentData = await paymentRes.json();
+    const paymentData = await paymentRes.json() as any;
     if (!paymentData.success) throw new Error(`Payment initiation failed: ${JSON.stringify(paymentData)}`);
     console.log('✅ Payment initiated');
     const { memoTemplate } = paymentData.data;
@@ -104,7 +104,7 @@ async function run() {
     // 7. List Content
     console.log('\n7. Listing Content...');
     const contentRes = await fetch(`${API_URL}/content?creatorId=${creatorId}`);
-    const contentData = await contentRes.json();
+    const contentData = await contentRes.json() as any;
     if (!contentData.success) throw new Error(`Content list failed: ${JSON.stringify(contentData)}`);
     console.log('✅ Content listed');
 

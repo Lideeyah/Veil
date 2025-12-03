@@ -1,0 +1,15 @@
+{
+    "extends": "../config/tsconfig.json",
+    "compilerOptions": {
+        "target": "es2020",
+        "baseUrl": ".",
+        "paths": {
+            "@veil/types": [
+                "../types/src/index.ts"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*"
+    ]
+}

@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { prisma } from '../utils/db';
 import { config } from '../config';
 import { AppError } from '../middleware/errorHandler';
-import { hashPassword, comparePassword, encrypt, generateRandomKey } from '../utils/crypto';
+import { hashPassword, comparePassword, encrypt, decrypt, generateRandomKey } from '../utils/crypto';
 import { generateShieldedAddress } from '@veil/zcash';
 import {
     RegisterCreatorRequest,
@@ -20,7 +20,7 @@ const signToken = (id: string, username: string) => {
     const options: jwt.SignOptions = {
         expiresIn: config.jwt.expiresIn as jwt.SignOptions['expiresIn'],
     };
-    return jwt.sign(payload, secret, options);
+    return jwt.sign(payload, secret as jwt.Secret, options);
 };
 
 export const register = async (req: Request, res: Response, next: NextFunction) => {

@@ -1,7 +1,5 @@
-```json
 {
     "version": 2,
     "buildCommand": "cd /vercel/path0 && pnpm build",
     "installCommand": "pnpm install"
 }
-```

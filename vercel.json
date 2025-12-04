@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "buildCommand": "cd ../.. && pnpm build",
+    "buildCommand": "cd /vercel/path0 && pnpm build",
     "installCommand": "pnpm install",
     "outputDirectory": "apps/web/.next"
 }

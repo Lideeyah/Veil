@@ -16,8 +16,7 @@
     "prettier": "^3.0.0",
     "prisma": "5.22.0",
     "turbo": "latest",
-    "typescript": "^5.9.3",
-    "next": "14.0.0"
+    "typescript": "^5.9.3"
   },
   "packageManager": "pnpm@8.15.0",
   "workspaces": [
@@ -26,6 +25,9 @@
   ],
   "dependencies": {
     "@prisma/client": "5.22.0",
-    "zod": "^4.1.13"
+    "zod": "^4.1.13",
+    "next": "14.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   }
 }

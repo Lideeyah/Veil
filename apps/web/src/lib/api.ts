@@ -17,18 +17,26 @@ async function fetcher<T>(endpoint: string, options: RequestInit = {}): Promise<
         ...options.headers,
     };
 
-    const response = await fetch(`${API_URL}${endpoint}`, {
-        ...options,
-        headers,
-    });
+    try {
+        const response = await fetch(`${API_URL}${endpoint}`, {
+            ...options,
+            headers,
+        });
 
-    const data = await response.json();
+        const data = await response.json();
 
-    if (!response.ok) {
-        throw new Error(data.error?.message || 'Something went wrong');
+        if (!response.ok) {
+            throw new Error(data.error?.message || 'Something went wrong');
+        }
+
+        return data.data;
+    } catch (error) {
+        // If API is unavailable (e.g., Render sleeping), throw a friendly error
+        if (error instanceof TypeError && error.message.includes('fetch')) {
+            throw new Error('API is currently unavailable. Please try again later.');
+        }
+        throw error;
     }
-
-    return data.data;
 }
 
 export const api = {
